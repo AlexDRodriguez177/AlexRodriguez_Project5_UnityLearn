@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     {
 
     }
+    /// <summary>
+    /// While loop that spawns targets 
+    /// picks a random target prefab from the list
+    /// uses a coroutine to wait for a specified spawn rate
+    /// </summary>
 
     IEnumerator SpawnTarget()
     {
