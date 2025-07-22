@@ -8,9 +8,12 @@ public class Target : MonoBehaviour
     private int maxStrength = 16;
     private int torqueRange = 10;
     private float spawnXRange = 4f;
-    private float spawnYPosition = -6f; 
+    private float spawnYPosition = -6f;
 
-
+    /// <summary>
+    /// Got the Rigidbody component and apply an upward force and random torque.
+    /// Set a random position within specified ranges.
+    /// </summary>
     void Start()
     {
        targetRb = GetComponent<Rigidbody>();
