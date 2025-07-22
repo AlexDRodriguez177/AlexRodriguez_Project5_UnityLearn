@@ -14,6 +14,10 @@ public class Target : MonoBehaviour
     public int pointValue;
     public ParticleSystem explosionParticle;
 
+    private AudioSource objectDestroyed;
+    public AudioClip objectDestroyedSound;
+
+
     /// <summary>
     /// Got the Rigidbody component and apply an upward force and random torque.
     /// Set a random position within specified ranges.
@@ -29,18 +33,22 @@ public class Target : MonoBehaviour
         transform.position = RandomSpawnPosition();
 
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        objectDestroyed = GameObject.Find("Border").GetComponent<AudioSource>();
     }
 
     private void OnMouseDown()
     {
         if (gameManager.isGameActive)
         {
-        // Destroy the target object when clicked
-        Destroy(gameObject);
-        // Instantiate explosion particle effect at the target's position and rotation
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        // Add score to the game manager
-        gameManager.UpdateScore(pointValue);
+            // Play the object destroyed sound effect
+            objectDestroyed.PlayOneShot(objectDestroyedSound);
+            // Instantiate explosion particle effect at the target's position and rotation
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            // Add score to the game manager
+            gameManager.UpdateScore(pointValue);
+            // Destroy the target object when clicked
+            Destroy(gameObject);
         }
     }
 
