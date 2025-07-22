@@ -30,6 +30,14 @@ public class Target : MonoBehaviour
     {
 
     }
+
+    private void OnMouseDown()
+    {
+        // Destroy the target object when clicked
+        Destroy(gameObject);
+    }
+
+    
     /// <summary>
     /// Calculates a random force and multiplys it by s Vector3.up 
     /// </summary>
