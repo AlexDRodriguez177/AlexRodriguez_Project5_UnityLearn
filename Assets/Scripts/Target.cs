@@ -10,6 +10,10 @@ public class Target : MonoBehaviour
     private float spawnXRange = 4f;
     private float spawnYPosition = -2f;
 
+    private GameManager gameManager;
+    public int pointValue;
+    public ParticleSystem explosionParticle;
+
     /// <summary>
     /// Got the Rigidbody component and apply an upward force and random torque.
     /// Set a random position within specified ranges.
@@ -23,6 +27,8 @@ public class Target : MonoBehaviour
         targetRb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
 
         transform.position = RandomSpawnPosition();
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
 
@@ -35,6 +41,10 @@ public class Target : MonoBehaviour
     {
         // Destroy the target object when clicked
         Destroy(gameObject);
+        // Instantiate explosion particle effect at the target's position and rotation
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        // Add score to the game manager
+        gameManager.UpdateScore(pointValue);
     }
 
     private void OnTriggerEnter(Collider other)
