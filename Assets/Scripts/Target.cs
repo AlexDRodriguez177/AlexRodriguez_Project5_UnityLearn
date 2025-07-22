@@ -4,11 +4,11 @@ public class Target : MonoBehaviour
 {
 
     private Rigidbody targetRb;
-    private int minStrength = 14;
-    private int maxStrength = 18;
+    private int minStrength = 12;
+    private int maxStrength = 16;
     private int torqueRange = 10;
     private float spawnXRange = 4f;
-    private float spawnYPosition = -6f;
+    private float spawnYPosition = -2f;
 
     /// <summary>
     /// Got the Rigidbody component and apply an upward force and random torque.
@@ -37,25 +37,31 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        // Destroy the target object if it falls below a certain position
+        Destroy(gameObject);
+    }
+
+
     /// <summary>
     /// Calculates a random force and multiplys it by s Vector3.up 
     /// </summary>
-    Vector3 RandomForce()
+    private Vector3 RandomForce()
     {
         return Vector3.up * Random.Range(minStrength, maxStrength);
     }
     /// <summary>
     /// Calculates a randome torque for the objects
     /// </summary>
-    float RandomTorque()
+    private float RandomTorque()
     {
         return Random.Range(-torqueRange, torqueRange);
     }
     /// <summary>
     /// Calculates a random spawn position for the target objects
     /// </summary>
-    Vector3 RandomSpawnPosition()
+    private Vector3 RandomSpawnPosition()
     {
         return new Vector3(Random.Range(-spawnXRange, spawnXRange), spawnYPosition);
     }
