@@ -1,29 +1,30 @@
-using NUnit.Framework;
+using UnityEngine.UI;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targetPrefabs;
+    public bool isGameActive;
     private float spawnRate = 1f;
 
     private int score;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOverText;
+    public Button restartButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isGameActive = true;
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     /// <summary>
     /// While loop that spawns targets 
     /// picks a random target prefab from the list
@@ -32,13 +33,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnTarget()
     {
-        while (true)
+        while (isGameActive)
         {
-            
+
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targetPrefabs.Count);
             Instantiate(targetPrefabs[index]);
-            
+
         }
     }
 
@@ -48,5 +49,15 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
 
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

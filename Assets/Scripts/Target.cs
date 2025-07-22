@@ -39,18 +39,26 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (gameManager.isGameActive)
+        {
         // Destroy the target object when clicked
         Destroy(gameObject);
         // Instantiate explosion particle effect at the target's position and rotation
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         // Add score to the game manager
         gameManager.UpdateScore(pointValue);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // Destroy the target object if it falls below a certain position
         Destroy(gameObject);
+        // If the good objects falls below a certain position calls the game over method in GameManager
+        if (!gameObject.CompareTag("Bad"))
+        {
+            gameManager.GameOver();
+        }
     }
 
 
