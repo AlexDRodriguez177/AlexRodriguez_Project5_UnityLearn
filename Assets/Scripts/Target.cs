@@ -4,8 +4,8 @@ public class Target : MonoBehaviour
 {
 
     private Rigidbody targetRb;
-    private int minStrength = 12;
-    private int maxStrength = 16;
+    private int minStrength = 14;
+    private int maxStrength = 18;
     private int torqueRange = 10;
     private float spawnXRange = 4f;
     private float spawnYPosition = -6f;
@@ -49,6 +49,6 @@ public class Target : MonoBehaviour
     /// </summary>
     Vector3 RandomSpawnPosition()
     {
-        return new Vector3(Random.Range(-spawnXRange, spawnXRange), -spawnYPosition);
+        return new Vector3(Random.Range(-spawnXRange, spawnXRange), spawnYPosition);
     }
 }
