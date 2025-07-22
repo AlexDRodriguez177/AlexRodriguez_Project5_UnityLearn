@@ -31,12 +31,6 @@ public class Target : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
-
-    void Update()
-    {
-
-    }
-
     private void OnMouseDown()
     {
         if (gameManager.isGameActive)
