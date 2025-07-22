@@ -15,13 +15,18 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
+    public GameObject titleScreen;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+   
+
+    public void StartGame(int difficultyLevel)
     {
+        spawnRate /= difficultyLevel;
         isGameActive = true;
+        score = 0;
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
+        titleScreen.gameObject.SetActive(false);
     }
 
 
